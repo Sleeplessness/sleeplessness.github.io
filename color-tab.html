@@ -3,9 +3,16 @@
 <HEAD>
 </HEAD>
 <BODY>
-<input id="_color" type="text"/><input type="button" value="Add"/>
-<table>
-<tr><td style="background-color:#FFAABB;">#FFAABB;</td></tr>
-</table>
+<input id="_color" type="text"/><input type="button" value="Add" onclick="addColor();"/>
+<div id="_tabs">
+<p style="background-color:#FFAABB;">#FFAABB;</p>
+</div>
+<script>
+  function addColor() {
+    var color = document.getElenmentById("_color").value;
+    var tabs = document.getElenmentById("_tabs");
+    tabs.innerHTML = tabs.innerHTML + "<p style=\"background-color:"+color+"\">"+color+"</p>";
+  }
+</script>  
 </BODY>
 </HTML>
