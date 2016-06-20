@@ -9,7 +9,8 @@
 </div>
 <script>
   function addColor() {
-    var color = document.getElenmentById("_color").value;
+    var colorE = document.getElenmentById("_color")
+    var color = colorE.value;
     var tabs = document.getElenmentById("_tabs");
     tabs.innerHTML = tabs.innerHTML + "<p style=\"background-color:"+color+"\">"+color+"</p>";
   }
