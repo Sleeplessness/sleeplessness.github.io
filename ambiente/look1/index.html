@@ -79,8 +79,8 @@ for(var i in imgString) {
 })(false);
 
 var loader = function () {
-  $.getJSON('images.json', function (json) {
-    console.log('JSON loaded');
+  $.getJSON('images.json', function (json, status, xhr) {
+    console.log('JSON loaded. Status is ' + status);
   });
 }
 
