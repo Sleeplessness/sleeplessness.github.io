@@ -81,6 +81,8 @@ for(var i in imgString) {
 var loader = function () {
   $.getJSON('images.json', function (json, status, xhr) {
     console.log('JSON loaded. Status is ' + status);
+    console.log(json.images.length);
+
   });
 }
 
