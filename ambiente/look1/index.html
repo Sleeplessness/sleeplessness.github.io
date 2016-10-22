@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <script src="../js/jquery-3.1.1.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
+    <script src="images.js"></script>
   </head>
   <body>
     <div class="container">
@@ -17,27 +18,12 @@
     </ol>-->
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
+
       <div class="item active">
         <img src="https://lh3.googleusercontent.com/gq0wk9U5Mi8xJJneXjT5lt8VLdcVRfwb-Zppj7C9hg0tLfRqmPay5CzWt_EyRj1sScZGUu5XdA=w1280-h1024-no" alt="">
         <div class="carousel-caption">
-          <h3>Model 1</h3>
-          <p>Beatiful flowers in Kolymbari, Crete.</p>
-        </div>
-      </div>
-
-      <div class="item">
-        <img src="https://lh3.googleusercontent.com/EIvpjg6nPiyoey4bQYah0EPfJSRsQN1lE4NR-nbq4x1FNPcCi12FpgwTSQmi8LktMbYhW7h96A=w1280-h1024-no" alt="">
-        <div class="carousel-caption">
-          <h3>Model 2</h3>
-          <p>Beatiful flowers in Kolymbari, Crete.</p>
-        </div>
-      </div>
-
-      <div class="item">
-        <img src="https://lh3.googleusercontent.com/I5lgpuSfWjcrQm_Fi7dc3BVLFsF81IX-WDWvSPxv8f3cjTndMpL8LUtErZsIgTm8GXQ-i_LC5A=w1280-h1024-no" alt="">
-        <div class="carousel-caption">
-          <h3>Model 3</h3>
-          <p>Beatiful flowers in Kolymbari, Crete.</p>
+          <h3>Фото 1</h3>
+          <p>Миллениум Парк  01_001</p>
         </div>
       </div>
 
@@ -82,11 +68,37 @@ var loader = function () {
   $.getJSON('images.json', function (json, status, xhr) {
     console.log('JSON loaded. Status is ' + status);
     console.log(json.images.length);
+    var imgs = json.images;
+    for(i in imgs) {
 
+    }
   });
 }
 
-loader();
+//loader();
+console.log("images.length ", images.length);
+
+function appendImage(num, callback) {
+  var middle = $('.carousel-inner').html();
+  // $('.carousel-indicators').html(indicators);
+  // indicators += '<li data-target="#theCarousel" data-slide-to="'+i+'" '+((i==0)?'class="active"':'')+'></li>';
+  middle += '<div class="item"><img src="'+images[num].src+'" alt="'+images[num].head+'">\n<div class="carousel-caption"><h3>Фото '+(num+1)+'</h3>\n<p>'+images[num].head+'</p>\n</div>\n</div>' + "\n\n";
+  $('.carousel-inner').html(middle);
+
+  if (callback && typeof callback == "function") {
+    return callback();
+  }
+}
+
+function imageIterator (num) {
+  if (num < images.length-1) {
+    appendImage(num, function () {
+      imageIterator (num + 1);
+    });
+  }
+}
+
+imageIterator(1);
 
   </script>
 </html>
