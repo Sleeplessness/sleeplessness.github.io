@@ -3,21 +3,32 @@
     <title>Ambiente</title>
     <meta charset="utf8">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+      .carousel-height {
+        height: 100%;
+      }
+    </style>
+
     <script src="../js/jquery-3.1.1.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <script src="images.js"></script>
   </head>
   <body>
     <div class="container">
-    <div id="theCarousel" class="carousel slide" data-ride="carousel">
+    <div class="full-height">
+    <div id="carousel-header">
+      <span id="carousel-topic">Миллениум Парк  01_001</span>
+    </div>
+    <div id="theCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
 
-    <div class="carousel-inner" role="listbox">
+    <div class="carousel-inner carousel-height" role="listbox">
 
-      <div class="item active">
-        <img src="https://lh3.googleusercontent.com/gq0wk9U5Mi8xJJneXjT5lt8VLdcVRfwb-Zppj7C9hg0tLfRqmPay5CzWt_EyRj1sScZGUu5XdA=w1280-h1024-no" alt="">
+      <div class="item active carousel-height">
+        <img class="carousel-height" src="https://lh3.googleusercontent.com/gq0wk9U5Mi8xJJneXjT5lt8VLdcVRfwb-Zppj7C9hg0tLfRqmPay5CzWt_EyRj1sScZGUu5XdA=w1280-h1024-no" alt="">
         <div class="carousel-caption">
-          <h3>Фото 1</h3>
-          <p>Миллениум Парк  01_001</p>
+          <!-- <h3>Фото 1</h3> -->
+          <!-- <p>Миллениум Парк  01_001</p> -->
         </div>
       </div>
 
@@ -33,14 +44,16 @@
       <span class="sr-only">Next</span>
     </a>
   </div>
+  </div>
+  </div>
   </body>
   <script>
 
-console.log("images.length ", images.length);
+// console.log("images.length ", images.length);
 
 function appendImage(num, callback) {
   var middle = $('.carousel-inner').html();
-  middle += '<div class="item"><img src="'+images[num].src+'" alt="'+images[num].head+'">\n<div class="carousel-caption"><h3>Фото '+(num+1)+'</h3>\n<p>'+images[num].head+'</p>\n</div>\n</div>' + "\n\n";
+  middle += '<div class="item"><img class="carousel-height" src="'+images[num].src+'" alt="'+images[num].head+'">\n<div class="carousel-caption hidden"><h3>Фото '+(num+1)+'</h3>\n<p>'+images[num].head+'</p>\n</div>\n</div>' + "\n\n";
   $('.carousel-inner').html(middle);
 
   if (callback && typeof callback == "function") {
@@ -58,5 +71,15 @@ function imageIterator (num) {
 
 imageIterator(1);
 
+$('#theCarousel').on('slid.bs.carousel', function () {
+  $('#carousel-topic').text($('.active > .carousel-caption > p').text());
+});
+
+(function () {
+                // document.documentElement.­clientHeight
+  var cHeight = document.documentElement.clientHeight - parseInt($('#carousel-header').css('height'));
+  $("<style>.carousel-height {height: "+cHeight+"px;}</style>").appendTo('body');
+  $('.item img').css('height', cHeight).css('margin','auto');
+})();
   </script>
 </html>
